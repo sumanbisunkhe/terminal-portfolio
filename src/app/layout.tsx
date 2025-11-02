@@ -13,8 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Suman Bisunkhe | Portfolio",
-  description: "Suman Bisunkhe's Developer Portfolio",};
+  title: "𝓢𝓾𝓶𝓪𝓷 𝓑𝓲𝓼𝓾𝓷𝓴𝓱𝓮",
+  description: "Interactive IDE-style portfolio showcasing my professional journey, projects, and skills",
+  icons: {
+    icon: '/favicon.ico',
+  },
+};
 
 export default function RootLayout({
   children,
@@ -22,11 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}
-        style={{ margin: 0, padding: 0, width: '100vw', height: '100vh' }}
-        suppressHydrationWarning
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
