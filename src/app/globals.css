@@ -1,26 +1,223 @@
 @import "tailwindcss";
 
+/* -------------------------------
+   Root Variables
+---------------------------------*/
 :root {
+  /* Light Mode Colors */
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Terminal Neon Theme */
+  --terminal-bg: #0a0a0a;
+  --neon-green: #00ff88;
+  --neon-cyan: #00ffe1;
+  --neon-purple: #b266ff;
+
+  /* Fonts */
+  --font-sans: 'Arial', Helvetica, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* Dark Mode Override */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    --terminal-bg: #0a0a0a;
+    --neon-green: #00ff88;
+    --neon-cyan: #00ffe1;
+    --neon-purple: #b266ff;
   }
 }
 
+/* -------------------------------
+   Body Styles
+---------------------------------*/
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--terminal-bg);
+  color: var(--neon-green);
+  font-family: var(--font-mono);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Text Selection */
+::selection {
+  background: var(--neon-green, #00ff88)33;
+  color: #000000;
+}
+
+/* -------------------------------
+   Neon Text Glow Classes
+---------------------------------*/
+.text-neon-green {
+  color: var(--neon-green);
+  text-shadow:
+    0 0 4px var(--neon-green),
+    0 0 8px var(--neon-green),
+    0 0 16px var(--neon-green);
+}
+
+.text-neon-cyan {
+  color: var(--neon-cyan);
+  text-shadow:
+    0 0 4px var(--neon-cyan),
+    0 0 8px var(--neon-cyan),
+    0 0 16px var(--neon-cyan);
+}
+
+.text-neon-purple {
+  color: var(--neon-purple);
+  text-shadow:
+    0 0 4px var(--neon-purple),
+    0 0 8px var(--neon-purple),
+    0 0 16px var(--neon-purple);
+}
+
+/* -------------------------------
+   Terminal Cursor
+---------------------------------*/
+.cursor {
+  display: inline-block;
+  width: 1ch;
+  background-color: var(--neon-green);
+  animation: blink 1s infinite, flicker 0.15s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 22%, 24%, 55% { opacity: 0.4; }
+}
+
+/* -------------------------------
+   Utility Classes
+---------------------------------*/
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-screen {
+  width: 100vw;
+  height: 100vh;
+}
+
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+
+.terminal-window {
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--neon-green);
+  border-radius: 12px;
+  box-shadow: 0 0 20px var(--neon-green55);
+  padding: 2rem;
+  min-height: 70vh;
+  max-width: 900px;
+  margin: 2rem auto;
+  position: relative;
+}
+
+.cursor {
+  display: inline-block;
+  width: 1ch;
+  background-color: var(--neon-green);
+  animation: blink 1s infinite, flicker 0.15s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 22%, 24%, 55% { opacity: 0.4; }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-gray-100 antialiased;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  }
+}
+
+@layer utilities {
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-cyan-500/50 rounded-full;
+    transition: background 0.2s;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-cyan-500/80;
+  }
+
+  /* Terminal cursor blink animation */
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .cursor {
+    animation: blink 1s infinite;
+  }
+
+  /* Glow effect */
+  .glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  /* Glass morphism */
+  .glass {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Scan line effect */
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  .scanline {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(transparent, rgba(6, 182, 212, 0.3), transparent);
+    animation: scan 8s linear infinite;
+    pointer-events: none;
+  }
+}
+
+/* Selection styling */
+::selection {
+  @apply bg-cyan-500/30 text-cyan-100;
+}
+
+::-moz-selection {
+  @apply bg-cyan-500/30 text-cyan-100;
 }

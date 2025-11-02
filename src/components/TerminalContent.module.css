@@ -1,0 +1,219 @@
+.terminal {
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  color: #eaeaea;
+  display: flex;
+  flex-direction: column;
+  font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-bottom: 1px solid #00d9ff;
+  padding: 8px 16px;
+  height: 36px;
+}
+
+.headerControls {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #00d9ff;
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+.tabBar {
+  display: flex;
+  background: linear-gradient(135deg, #0a0a0a 0%, #000000 100%);
+  border-bottom: 2px solid #00d9ff;
+  height: 32px;
+  align-items: stretch;
+}
+
+.tabsContainer {
+  display: flex;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tabsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  border-right: 1px solid rgba(0, 217, 255, 0.3);
+  background: rgba(15, 52, 96, 0.3);
+  color: #a8dadc;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: all 0.2s;
+  position: relative;
+  min-width: 120px;
+  user-select: none;
+}
+
+.tab:hover {
+  background: rgba(0, 217, 255, 0.2);
+  color: #00ffff;
+}
+
+.tab:hover .tabCloseBtn {
+  opacity: 1;
+}
+
+.activeTab {
+  background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+  color: #00ffff;
+  font-weight: 600;
+  box-shadow: 0 -2px 10px rgba(0, 217, 255, 0.3);
+}
+
+.activeTab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00d9ff 0%, #00ffff 50%, #00d9ff 100%);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.tabLabel {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tabCloseBtn {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 16px;
+  opacity: 0;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.activeTab .tabCloseBtn {
+  opacity: 0.7;
+}
+
+.tabCloseBtn:hover {
+  opacity: 1 !important;
+  background: rgba(255, 107, 107, 0.3);
+  color: #ff6b6b;
+}
+
+.closeAllBtn {
+  background: none;
+  border: none;
+  color: #a8dadc;
+  cursor: pointer;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+  border-left: 1px solid rgba(0, 217, 255, 0.3);
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.closeAllBtn:hover {
+  background: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background: #000000;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #00d9ff, #00ffff);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+.welcome {
+  color: #00d9ff;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+.command {
+  color: #00ffff;
+  font-weight: 500;
+  margin: 8px 0;
+}
+
+.output {
+  color: #eaeaea;
+  margin: 4px 0;
+  white-space: pre-wrap;
+}
+
+.prompt {
+  color: #00d9ff;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+.cursor {
+  color: #00ffff;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
